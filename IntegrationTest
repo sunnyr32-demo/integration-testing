@@ -1,0 +1,20 @@
+public class IntegrationTest {
+
+  @Test
+  public void testGetEndpoint() {
+    given()
+      .when().get("https://example.com/api/endpoint")
+      .then()
+      .statusCode(200);
+  }
+
+  @Test
+  public void testPostEndpoint() {
+    given()
+      .contentType("application/json")
+      .body("{\"key\":\"value\"}")
+      .when().post("https://example.com/api/endpoint")
+      .then()
+      .statusCode(201);
+  }
+}
