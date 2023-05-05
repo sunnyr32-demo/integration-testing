@@ -1,0 +1,16 @@
+pipeline {
+  agent any
+  stages {
+    stage('Integration Test') {
+      steps {
+        script {
+          def response = httpRequest "http://localhost:8080/api/v1/users"
+          assert response.status == 200
+          assert response.contentType == 'application/json'
+          def json = new JsonSlurperClassic().parseText(response.content)
+          assert json.size() == 2 //assuming there are two users in the response
+        }
+      }
+    }
+  }
+}
